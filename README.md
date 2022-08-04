@@ -2,26 +2,35 @@
 
 IOT project to monitor the amount of GitHub issues of a organisation.
 
-## Hardware
+## Requirements
 
-- [ ] Picture frame
-- [ ] ESP Wemos D1 mini
+### Hardware
+
+- [ ] A4 Picture frame
+- [ ] ESP 8266 Wemos D1 mini
 - [ ] Power supply unit
 - [ ] Battery with voltage regulator
 - [ ] 7 segment display 4 digits
 
-## Tools
+### Tools
 
-- [ ] Soldering iron
-  - [ ] Tin
-  - [ ] Battery
+- **Soldering**
+  - [ ] Soldering iron
   - [ ] Soldering grease
-- [ ] Cable
-  - [ ] Data cable
-  - [ ] Power cable
+  - [ ] Tin
+  - [ ] Helping Hand
+- **Cable**
+  - [ ] Data cable 25AWG
+  - [ ] Power cable 25AWG
   - [ ] Micro USB cable
-- [ ] Power supply USB TypeC
-- [ ] Helping Hand
+  - [ ] Type C USB cable
+- [ ] Power supply USB Type C
+  
+### Software requirements
+
+- VSCode
+- PlatformIO plugin
+- USB serial driver (MacOS, Windows)
 
 ## Software
 

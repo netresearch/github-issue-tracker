@@ -7,7 +7,7 @@ void setup()
 
 void loop()
 {
-    for (int i = 50; i < 1000; i=i+10)
+    for (int i = 10; i <= 200; i=i+10)
     {
         digitalWrite(LED_BUILTIN, HIGH);
         delay(i);
