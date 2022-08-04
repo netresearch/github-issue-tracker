@@ -2,8 +2,6 @@
 
 IOT project to monitor the amount of GitHub issues of a organisation.
 
-
-
 ## Hardware
 
 - [ ] Picture frame
@@ -15,29 +13,27 @@ IOT project to monitor the amount of GitHub issues of a organisation.
 ## Tools
 
 - [ ] Soldering iron
-    - [ ] Tin
-    - [ ] Battery
-    - [ ] Soldering grease
+  - [ ] Tin
+  - [ ] Battery
+  - [ ] Soldering grease
 - [ ] Cable
-    - [ ] Data cable
-    - [ ] Power cable
-    - [ ] Micro USB cable
+  - [ ] Data cable
+  - [ ] Power cable
+  - [ ] Micro USB cable
 - [ ] Power supply USB TypeC
 - [ ] Helping Hand
-
 
 ## Software
 
 - [ ] OTA
 - [ ] Configurable
-    - [ ] Organisation
-    - [ ] Token
+  - [ ] Organisation
+  - [ ] Token
 - [ ] Deep Sleep
 - [ ] Battery monitoring
 - [ ] Polling GitHub API
-    - [ ] https://docs.github.com/en/rest/issues/issues#list-repository-issues
-    - [ ] gh api -H "Accept: application/vnd.github+json" /orgs/netresearch/repos
-
+  - [ ] https://docs.github.com/en/rest/issues/issues#list-repository-issues
+  - [ ] gh api -H "Accept: application/vnd.github+json" /orgs/netresearch/repos
 
 ## GraphQL
 
@@ -78,12 +74,14 @@ https://docs.github.com/en/graphql/overview/explorer
 - [ ] NR Logo
 
 ### Video
+
 - [ ] Live coding
 - [ ] Hardware assembling
 - [ ] Documentation
 - [ ] Room recording (participants)
 
 ### Sound
+
 - [ ] Coding (meet/discord)
 - [ ] Participants
 - [ ] Hardware
@@ -92,9 +90,9 @@ https://docs.github.com/en/graphql/overview/explorer
 
 - [ ] Software developer
 - [ ] Hardware
-    - [ ] IOT solderer
-    - [ ] Picture frame hobbyist
+  - [ ] IOT solderer
+  - [ ] Picture frame hobbyist
 - [ ] Documentation (+ Moderator)
-    - [ ] Repo
-    - [ ] Photos
-    - [ ] Video editor
+  - [ ] Repo
+  - [ ] Photos
+  - [ ] Video editor
