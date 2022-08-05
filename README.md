@@ -10,21 +10,27 @@ IOT project to monitor the amount of GitHub issues of a organisation.
 - [ ] ESP 8266 Wemos D1 mini
 - [ ] Power supply unit
 - [ ] Battery with voltage regulator
-- [ ] 7 segment display 4 digits
+- [ ] 7 segment display 4 digits / OLED Display
 
 ### Tools
 
-- **Soldering**
-  - [ ] Soldering iron
-  - [ ] Soldering grease
-  - [ ] Tin
-  - [ ] Helping Hand
-- **Cable**
-  - [ ] Data cable 25AWG
-  - [ ] Power cable 25AWG
-  - [ ] Micro USB cable
-  - [ ] Type C USB cable
-- [ ] Power supply USB Type C
+#### Soldering
+
+- [x] Soldering iron
+- [x] Soldering grease
+- [x] Tin
+- [x] Helping hand
+- [x] Cleaning sponge
+
+#### Cable
+
+- [x] Silicon cables 25AWG for the wiring
+- [x] Micro USB cable to flash the ESP8266
+- [x] Type C USB cable to charge the battery
+
+#### Power supply
+
+- [x] Power supply USB Type C to charge the battery
   
 ### Software requirements
 
@@ -33,6 +39,8 @@ IOT project to monitor the amount of GitHub issues of a organisation.
 - USB serial driver (MacOS, Windows)
 
 ## Software
+
+### Features
 
 - [ ] OTA
 - [ ] Configurable
