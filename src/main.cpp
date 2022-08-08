@@ -1,5 +1,6 @@
 #include <optional>
 
+#include <WiFiClientSecureBearSSL.h>
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
@@ -7,19 +8,30 @@
 #include <ArduinoJson.h>
 #include <Wire.h>
 #include <SPI.h>
+#include <Adafruit_SSD1306.h>
 
 #include "config.h"
 
-WiFiClient client;
-HTTPClient http;
+Adafruit_SSD1306 display(128, 32, &Wire, -1);
 
-std::optional<String> fetchRawGithubRepositories();
+std::optional<int> fetchTotalOpenIssues();
 
 void setup()
 {
+    Wire.begin(D5, D6);
+
     Serial.begin(115200);
     Serial.println();
     Serial.println();
+
+    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
+    {
+        Serial.println(F("Start of SSD1306 failed"));
+        for (;;)
+        {
+        }
+    }
+    display.display();
 
     WiFi.begin(SSID, PASSWORD);
     Serial.print(F("Connecting to WiFi ..."));
@@ -31,36 +43,26 @@ void setup()
     }
 
     Serial.println(F("Connected to WiFi network"));
+
+    display.setTextSize(3);
+    display.setTextColor(SSD1306_WHITE);
+    display.clearDisplay();
+    display.display();
 }
 
 void loop()
 {
-    delay(1000);
+    delay(10000);
 
-    int totalIssues = 0;
-
-    std::optional<String> rawRepositories = fetchRawGithubRepositories();
-    if (rawRepositories)
+    std::optional<int> totalOpenIssues = fetchTotalOpenIssues();
+    if (totalOpenIssues)
     {
-        StaticJsonDocument<JSON_ARRAY_SIZE(100)> jsonRepositories;
-        DeserializationError error = deserializeJson(jsonRepositories, rawRepositories.value());
-        if (error)
-        {
-            Serial.println(F("Failed to parse JSON"));
-            return;
-        }
+        Serial.printf("Total open issues: %d\n", totalOpenIssues.value());
 
-        // JsonArray repositories = jsonRepositories.as<JsonArray>();
-        // for (JsonObject repository : repositories)
-        // {
-        //     const char *name = repository["name"];
-        //     int openIssues = repository["open_issues_count"];
-        //     Serial.printf("%s: %d\n", name, openIssues);
-
-        //     totalIssues += openIssues;
-        // }
-
-        Serial.printf("Total open issues: %d\n", totalIssues);
+        display.clearDisplay();
+        display.setCursor(0, 0);
+        display.printf("%d", totalOpenIssues.value());
+        display.display();
 
         // Go to deep sleep for one hour
         // ESP.deepSleep(1000 * 1000 * 60 * 60);
@@ -71,26 +73,57 @@ void loop()
     }
 }
 
-std::optional<String> fetchRawGithubRepositories()
+std::optional<int> fetchTotalOpenIssues()
 {
-    if (!http.begin(client, "https://api.github.com/orgs/netresearch/repos"))
+    int totalOpenIssues = 0;
+
+    WiFiClientSecure client;
+    client.setInsecure();
+
+    HTTPClient https;
+
+    if (!https.begin(client, "https://api.github.com/graphql"))
     {
-        Serial.println("HTTPClient failure");
-        http.end();
+        Serial.printf("HTTPClient failure\n");
+
+        display.setCursor(0, 0);
+        display.print("HTTPClient failure");
+
+        https.end();
         return std::nullopt;
     }
 
-    int code = http.GET();
+    https.addHeader("Content-Type", "application/json");
+    https.addHeader("Authorization", "Bearer " + String(GITHUB_TOKEN));
+
+    int code = https.POST("{\"query\":\"{ organization(login: \\\"netresearch\\\") { repositories(first: 100) { nodes { issues(states: OPEN ) { totalCount } } } } }\"}");
+
     if (code != 200)
     {
-        Serial.printf("HTTPClient failure: %d\n", code);
-        http.end();
+        Serial.printf("HTTPClient failure: %s\n", https.errorToString(code).c_str());
+
+        https.end();
         return std::nullopt;
     }
 
-    String payload = http.getString();
+    DynamicJsonDocument doc(8192);
+    DeserializationError error = deserializeJson(doc, https.getStream());
+    if (error)
+    {
+        Serial.print(F("deserializeJson() failed: "));
+        Serial.println(error.f_str());
 
-    http.end();
+        return std::nullopt;
+    }
 
-    return payload;
+    https.end();
+
+    for (JsonObject repository : doc["data"]["organization"]["repositories"]["nodes"].as<JsonArray>())
+    {
+        int openIssues = repository["issues"]["totalCount"];
+
+        totalOpenIssues += openIssues;
+    }
+
+    return totalOpenIssues;
 }
