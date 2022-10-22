@@ -3,6 +3,9 @@
 #define GITHUB_TOKEN ""
 #define GITHUB_ORGANIZATION ""
 
+#define OTA_HOSTNAME ""
+#define OTA_PASSWORD ""
+
 #define WIFI_SSID_1 ""
 #define WIFI_PASSWORD_1 ""
 

@@ -8,6 +8,7 @@
 #include "config.h"
 #include "network.h"
 #include "message.h"
+#include "ota.h"
 
 /*
 #include "fetch.h"
@@ -28,19 +29,20 @@ void setup()
     Message::logo();
     // setupFetch();
     // setupDisplay();
-    setupNetwork();
+    Network::setup();
+    Ota::setup();
 }
 
 void loop()
 {
-    delay(1000);
+    Ota::loop();
 
     // std::optional<int> totalOpenIssues = fetchTotalOpenIssues();
     std::optional<int> totalOpenIssues = 15;
     if (totalOpenIssues)
     {
         // Serial.printf("Total open issues: %d\n", totalOpenIssues.value());
-        Serial.printf("Total open issues: %d\n", totalOpenIssues);
+        // Serial.printf("Total open issues: %d\n", totalOpenIssues);
         /*
         display.clearDisplay();
         display.setCursor(0, 0);

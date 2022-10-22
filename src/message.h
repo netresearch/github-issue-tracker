@@ -61,11 +61,11 @@ public:
     static void warning(String message)
     {
 
-        Serial.println("❎\t" + message);
+        Serial.println("⚠️\t" + message);
     }
 
     static void error(String message)
     {
-        Serial.println("❌\t" + message);
+        Serial.println("🚩\t" + message);
     }
 };
