@@ -8,11 +8,11 @@
 #include "config.h"
 #include "network.h"
 #include "message.h"
+#include "display.h"
 #include "ota.h"
 
 /*
 #include "fetch.h"
-#include "display.h"
 */
 
 void setup()
@@ -28,7 +28,7 @@ void setup()
     // Logo
     Message::logo();
     // setupFetch();
-    // setupDisplay();
+    Display::setup();
     Network::setup();
     Ota::setup();
 }

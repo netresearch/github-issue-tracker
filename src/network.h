@@ -16,7 +16,7 @@ class Network
 public:
     static void setup()
     {
-        Message::info("Setup: Network\n");
+        Message::info("Setup: Network");
         String payload = "";
 
         WiFi.begin(WIFI_SSID_1, WIFI_PASSWORD_1);
