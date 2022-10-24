@@ -10,12 +10,7 @@
 #include "message.h"
 #include "display.h"
 #include "ota.h"
-
-/*
 #include "fetch.h"
-*/
-
-// Global variables
 
 void setup()
 {
@@ -30,6 +25,7 @@ void setup()
     // Logo
     Message::logo();
     // setupFetch();
+    Fetch::setup();
     Display::setup();
     Network::setup();
     Ota::setup();
@@ -37,8 +33,11 @@ void setup()
 
 void loop()
 {
-    Ota::loop();
-    Network::loop();
+    if (Network::loop())
+    {
+        Ota::loop();
+        Fetch::loop();
+    }
 
     // std::optional<int> totalOpenIssues = fetchTotalOpenIssues();
     std::optional<int> totalOpenIssues = 15;

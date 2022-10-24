@@ -1,10 +1,28 @@
+
+#include <Arduino.h>
+#include <ArduinoJson.h>
+// #include <HTTPClient.h>
+
+// Custom classes and configuration
+#include "config.h"
+#include "message.h"
+
 std::optional<int> fetchTotalOpenIssues();
 
-void setupFetch()
+class Fetch
 {
-    Serial.println("✅  Setup: Fetch");
-}
+public:
+    static void setup()
+    {
+        Message::info("Setup: Fetch");
+    }
 
+    static void loop()
+    {
+        // Message::working("Fetching data\t", false);
+    }
+};
+/*
 std::optional<int> fetchTotalOpenIssues()
 {
     int totalOpenIssues = 0;
@@ -59,3 +77,4 @@ std::optional<int> fetchTotalOpenIssues()
 
     return totalOpenIssues;
 }
+*/

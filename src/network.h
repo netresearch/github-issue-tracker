@@ -78,9 +78,8 @@ public:
     */
     };
 
-    static void loop()
+    static bool loop()
     {
-        // Iterate over WiFi networks
         if (wifiMulti.run(networkConnectTimeoutMs) != WL_CONNECTED)
         {
             if (networkTrys % 6 == 0)
@@ -93,6 +92,7 @@ public:
                 Serial.print(F("."));
             }
             networkTrys++;
+            return false;
         }
         else
         {
@@ -110,6 +110,7 @@ public:
 
                 networkConnected = true;
             }
+            return true;
         }
     }
 };
