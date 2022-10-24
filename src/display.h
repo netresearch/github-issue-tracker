@@ -20,6 +20,7 @@ public:
         display.setTextColor(SSD1306_WHITE);
         display.clearDisplay();
         display.display();
+        Message::success("Display setup complete");
     }
 
     static void set(String text)

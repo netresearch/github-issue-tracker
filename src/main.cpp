@@ -15,6 +15,8 @@
 #include "fetch.h"
 */
 
+// Global variables
+
 void setup()
 {
     // Wire.begin(D5, D6);
@@ -36,6 +38,7 @@ void setup()
 void loop()
 {
     Ota::loop();
+    Network::loop();
 
     // std::optional<int> totalOpenIssues = fetchTotalOpenIssues();
     std::optional<int> totalOpenIssues = 15;
@@ -52,6 +55,6 @@ void loop()
     }
     else
     {
-        Serial.println(F("Failed to fetch repositories"));
+        // Serial.println(F("Failed to fetch repositories"));
     }
 }
