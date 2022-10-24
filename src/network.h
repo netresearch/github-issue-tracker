@@ -99,7 +99,7 @@ public:
             if (networkConnected == false)
             {
                 Message::success("Connected to WiFi network", true, true);
-                Message::data("MAC:\t" + WiFi.macAddress());
+                Message::data("MAC:\t\t" + WiFi.macAddress());
                 Message::data("SSID:\t\t" + WiFi.SSID());
                 Message::data("IP:\t\t" + WiFi.localIP().toString());
                 Message::data("DNS:\t\t" + WiFi.dnsIP().toString());
