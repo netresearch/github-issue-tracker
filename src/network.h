@@ -1,24 +1,19 @@
-/*
-#include <WiFi.h>
-#include <WiFiMulti.h>
-#include <HTTPClient.h>
-
-#include <WiFiClientSecureBearSSL.h>
-#include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
-#include <WiFiClient.h>
-*/
 #include <ESP8266WiFiMulti.h>
+// #include <HTTPClient.h>
 
+// Custom classes and configuration
 #include "config.h"
 #include "message.h"
 
+// Instances
 ESP8266WiFiMulti wifiMulti;
+
+// Configuration
 uint8_t networkTrys = 0;
 bool networkConnected = false;
-// WiFi connect timeout per AP. Increase when connecting takes longer.
-const uint32_t networkConnectTimeoutMs = 100;
+const uint32_t networkConnectTimeoutMs = 5000; // WiFi connect timeout per AP. Increase when connecting takes longer.
 
+// Namespace
 using namespace std;
 
 class Network
@@ -103,20 +98,16 @@ public:
         {
             if (networkConnected == false)
             {
-                // Message::br();
                 Message::success("Connected to WiFi network", true, true);
-                Message::info(WiFi.localIP().toString());
-                Message::info("\tIP:\t" + WiFi.localIP().toString());
-                Message::info("\tRSSI:\t" + String(WiFi.RSSI()) + " dBm");
-                Message::info("\tChannel:\t" + String(WiFi.channel()));
-                /*
-                Message::info(F("SSID:\t" + WiFi.SSID()));
-                Message::info("MAC:\t" + WiFi.macAddress());
-                Message::info("RSSI:\t" + String(WiFi.RSSI()) + " dBm");
-                Message::info("Subnet:\t" + WiFi.subnetMask());
-                Message::info("Gateway:\t" + WiFi.gatewayIP());
-                Message::info("DNS:\t" + WiFi.dnsIP());
-                */
+                Message::data("MAC:\t" + WiFi.macAddress());
+                Message::data("SSID:\t\t" + WiFi.SSID());
+                Message::data("IP:\t\t" + WiFi.localIP().toString());
+                Message::data("DNS:\t\t" + WiFi.dnsIP().toString());
+                Message::data("Gateway:\t" + WiFi.gatewayIP().toString());
+                Message::data("Subnet:\t" + WiFi.subnetMask().toString());
+                Message::data("RSSI:\t\t" + String(WiFi.RSSI()) + " dBm");
+                Message::data("Channel:\t" + String(WiFi.channel()));
+
                 networkConnected = true;
             }
         }

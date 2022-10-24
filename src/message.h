@@ -57,6 +57,11 @@ public:
             Serial.print("ℹ️\t" + message);
     }
 
+    static void data(String message)
+    {
+        Serial.println("\t♯ " + message);
+    }
+
     static void working(String message, bool newline = true)
     {
         if (newline)
