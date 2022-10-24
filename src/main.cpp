@@ -12,6 +12,9 @@
 #include "ota.h"
 #include "fetch.h"
 
+int delayTime = 1000;
+int issueCount = 0;
+
 void setup()
 {
     // Wire.begin(D5, D6);
@@ -36,7 +39,8 @@ void loop()
     if (Network::loop())
     {
         Ota::loop();
-        Fetch::loop();
+        issueCount = Fetch::loop(delayTime);
+        delay(delayTime);
     }
 
     // std::optional<int> totalOpenIssues = fetchTotalOpenIssues();

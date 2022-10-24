@@ -7,6 +7,10 @@
 #include "config.h"
 #include "message.h"
 
+int iteration = 0;
+int iterationTime = 0;
+const int iterationTimeWait = 1000 * 60 * 15; // 15 minutes
+
 std::optional<int> fetchTotalOpenIssues();
 
 class Fetch
@@ -17,9 +21,27 @@ public:
         Message::info("Setup: Fetch");
     }
 
-    static void loop()
+    static int loop(int delayTime)
     {
-        // Message::working("Fetching data\t", false);
+        iteration++;
+        iterationTime = iteration * delayTime;
+
+        // If every 30 seconds have passed
+        if (iterationTime % iterationTimeWait == 0)
+        {
+            // std::optional<int> totalOpenIssues = fetchTotalOpenIssues();
+            int totalOpenIssues = iteration;
+            if (totalOpenIssues)
+            {
+                return totalOpenIssues;
+            }
+            else
+            {
+                return -1;
+            }
+            iteration = 0;
+        }
+        return -1;
     }
 };
 /*
