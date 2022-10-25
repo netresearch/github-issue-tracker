@@ -7,10 +7,17 @@
 // Custom classes
 #include "message.h"
 
+/**
+ * @brief Setup the OTA class
+ */
 class Ota
 {
 
 public:
+    /**
+     * @brief Setup the OTA class
+     * @return void
+     */
     static void setup()
     {
         // Hostname defaults to esp8266-[ChipID]
@@ -18,7 +25,6 @@ public:
 
         // No authentication by default
         ArduinoOTA.setPassword((const char *)OTA_PASSWORD);
-
         ArduinoOTA.onStart([]()
                            {
             Message::logo();
@@ -30,6 +36,10 @@ public:
         ArduinoOTA.begin();
     }
 
+    /**
+     * @brief Handle the OTA class
+     * @return void
+     */
     static void loop()
     {
         ArduinoOTA.handle();

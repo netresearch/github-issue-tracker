@@ -1,5 +1,6 @@
-#include <Adafruit_SSD1306.h>
+#pragma once
 #include <Arduino.h>
+#include <Adafruit_SSD1306.h>
 
 // Configuration
 #include "config.h"
@@ -9,9 +10,16 @@
 
 Adafruit_SSD1306 display(128, 32, &Wire, -1);
 
+/**
+ * @brief Setup the display class
+ */
 class Display
 {
 public:
+    /**
+     * @brief Setup the display class
+     * @return void
+     */
     static void setup()
     {
         Message::info("Setup: Display");
@@ -23,6 +31,11 @@ public:
         Message::success("Display setup complete");
     }
 
+    /**
+     * @brief Displays the total number of open issues
+     * @param text String to print on the display
+     * @return void
+     */
     static void set(String text)
     {
         display.clearDisplay();

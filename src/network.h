@@ -16,10 +16,17 @@ const uint32_t networkConnectTimeoutMs = 5000; // WiFi connect timeout per AP. I
 // Namespace
 using namespace std;
 
+/**
+ * @brief Setup the network class
+ */
 class Network
 {
 
 public:
+    /**
+     * @brief Setup the network class
+     * @return void
+     */
     static void setup()
     {
         Message::info("Setup: Network");
@@ -78,6 +85,10 @@ public:
     */
     };
 
+    /**
+     * @brief Loop the network class
+     * @return bool
+     */
     static bool loop()
     {
         if (wifiMulti.run(networkConnectTimeoutMs) != WL_CONNECTED)
