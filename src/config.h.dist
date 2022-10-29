@@ -2,6 +2,8 @@
 
 #define GITHUB_TOKEN ""
 #define GITHUB_ORGANIZATION ""
+GITHUB_OWNER ""
+
 
 #define OTA_HOSTNAME ""
 #define OTA_PASSWORD ""
@@ -17,3 +19,12 @@
 
 #define WIFI_SSID_4 ""
 #define WIFI_PASSWORD_4 ""
+
+#define MQTT_HOST ""
+#define MQTT_PORT 1883
+#define MQTT_USER ""
+#define MQTT_PASSWORD ""
+
+#define MQTT_TOPIC "home/esp32"
+#define MQTT_TOPIC_STATUS MQTT_TOPIC "/status"
+#define MQTT_TOPIC_UPDATE MQTT_TOPIC "/update"

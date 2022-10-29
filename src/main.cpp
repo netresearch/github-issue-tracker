@@ -1,11 +1,13 @@
 #include <optional>
 
+// Libraries
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <Wire.h>
 #include <SPI.h>
 
-// Custom classes and configuration
+// Function and configuration
+#include "globals.h"
 #include "config.h"
 #include "network.h"
 #include "message.h"
@@ -15,7 +17,7 @@
 
 // Variables and constants
 const int delayTime = 10000;
-std::optional<int> issueCount = 0;
+std::optional<int> G_issueCount = 0;
 
 void setup()
 {
@@ -40,10 +42,11 @@ void loop()
     if (Network::loop())
     {
         Ota::loop();
-        issueCount = Fetch::loop(delayTime);
+        auto issueCount = Fetch::loop(delayTime);
         if (issueCount != -1)
         {
-            Message::info("Issue count: " + String(issueCount.value()));
+            G_issueCount = issueCount;
+            Message::info("Issue count: " + String(G_issueCount.value()));
             // Display::set(String(issueCount.value()));
         }
 

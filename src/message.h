@@ -1,71 +1,31 @@
 #pragma once
-#include <Arduino.h>
 
-/**
- * @brief Class to serial print messages
- *
- */
-class Message
+namespace Message
 {
-
-public:
     /**
      * @brief Prints a message to the serial port
      * @param message String to print
      * @return void
      */
-    static void overwrite(bool clearLine = true)
-    {
-        if (clearLine)
-        {
-            Serial.print("\r");
-            for (int i = 0; i < 80; i++)
-                Serial.print(" ");
-        }
-        Serial.print("\r");
-    }
+    void overwrite(bool clearLine = true);
 
     /**
      * @brief Prints the logo to the serial port
      * @return void
      */
-    static void logo()
-    {
-        Serial.println("");
-        Serial.println(" __     __");
-        Serial.println("| _| __|_ |");
-        Serial.println("| | '_ \\| |");
-        Serial.println("| | | | | |");
-        Serial.println("| |_| |_| |");
-        Serial.println("|__|   |__|");
-        Serial.println("");
-    }
+    void logo();
 
     /**
      * @brief Prints the bold logo to the serial port
      * @return void
      */
-    static void logoBold()
-    {
-        Serial.println("");
-        Serial.println("#####        #####");
-        Serial.println("#     #    #     #");
-        Serial.println("#     ##   #     #");
-        Serial.println("#     # #  #     #");
-        Serial.println("#     #  # #     #");
-        Serial.println("#     #   ##     #");
-        Serial.println("##### #    # #####");
-        Serial.println("");
-    }
+    void logoBold();
 
     /**
      * @brief Prints a line break to the serial port
      * @return void
      */
-    static void br()
-    {
-        Serial.println("");
-    }
+    void br();
 
     /**
      * @brief Prints a message to the serial port
@@ -74,25 +34,14 @@ public:
      * @param clearLine Whether to clear the line before printing the message
      * @return void
      */
-    static void info(String message, bool newline = true, bool overwrite = false)
-    {
-        if (overwrite)
-            Message::overwrite();
-        if (newline)
-            Serial.println("ℹ️\t" + message);
-        else
-            Serial.print("ℹ️\t" + message);
-    }
+    void info(String message, bool newline = true, bool overwrite = false);
 
     /**
      * @brief Prints a message to the serial port
      * @param message String to print
      * @return void
      */
-    static void data(String message)
-    {
-        Serial.println("\t♯ " + message);
-    }
+    void data(String message);
 
     /**
      * @brief Prints a message to the serial port
@@ -100,13 +49,7 @@ public:
      * @param newline Whether to print a newline after the message
      * @return void
      */
-    static void working(String message, bool newline = true)
-    {
-        if (newline)
-            Serial.println("🤖\t" + message);
-        else
-            Serial.print("🤖\t" + message);
-    }
+    void working(String message, bool newline = true);
 
     /**
      * @brief Prints a message to the serial port
@@ -115,33 +58,19 @@ public:
      * @param overwrite Whether to overwrite the current line
      * @return void
      */
-    static void success(String message, bool newline = true, bool overwrite = false)
-    {
-        if (overwrite)
-            Message::overwrite();
-        if (newline)
-            Serial.println("✅\t" + message);
-        else
-            Serial.print("✅\t" + message);
-    }
+    void success(String message, bool newline = true, bool overwrite = false);
 
     /**
      * @brief Prints a message to the serial port
      * @param message String to print on serial port
      * @return void
      */
-    static void warning(String message)
-    {
-        Serial.println("⚠️\t" + message);
-    }
+    void warning(String message);
 
     /**
      * @brief Prints a message to the serial port
      * @param message String to print
      * @return void
      */
-    static void error(String message)
-    {
-        Serial.println("🚩\t" + message);
-    }
-};
+    void error(String message);
+}

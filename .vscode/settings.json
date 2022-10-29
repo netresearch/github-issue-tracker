@@ -1,5 +1,7 @@
 {
-    "files.associations": {
-        "optional": "cpp"
-    }
+	"files.associations": {
+		"Vagrantfile": "ruby",
+		"optional": "cpp",
+		"system_error": "cpp"
+	}
 }
