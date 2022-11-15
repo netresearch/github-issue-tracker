@@ -71,31 +71,12 @@ It uses the GitHub GraphQL API to get the data. If you want, you can play around
 
 ### Photos
 
-- [ ] Parts overview
+- [x] Parts overview
 - [ ] Assembly
-- [ ] Result
+- [x] Result
 - [ ] NR Logo
 
 ### Video
 
-- [ ] Live coding
 - [ ] Hardware assembling
-- [ ] Documentation
-- [ ] Room recording (participants)
-
-### Sound
-
-- [ ] Coding (meet/discord)
-- [ ] Participants
-- [ ] Hardware
-
-## Roles
-
-- [ ] Software developer
-- [ ] Hardware
-  - [ ] IOT solderer
-  - [ ] Picture frame hobbyist
-- [ ] Documentation (+ Moderator)
-  - [ ] Repo
-  - [ ] Photos
-  - [ ] Video editor
+- [ ] HowTo configuration
