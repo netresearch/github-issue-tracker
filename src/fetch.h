@@ -2,6 +2,11 @@
 
 namespace Fetch
 {
+
+#ifndef NETWORK_H
+#define NETWORK_H
+#endif
+
     /**
      * @brief Setup the fetch class
      * @return void

@@ -1,15 +1,17 @@
+// Libraries
 #include <ESP8266WiFiMulti.h>
-// #include <HTTPClient.h>
+
+#include "network.h"
 
 // Custom classes and configuration
 #include "config.h"
 #include "message.h"
 
-namespace Network {
+// Global variables
+#include "globals.h"
 
-    // Instances
-    ESP8266WiFiMulti wifiMulti;
-
+namespace Network
+{
     // Configuration
     uint8_t networkTrys = 0;
     bool networkConnected = false;
@@ -31,55 +33,18 @@ namespace Network {
         WiFi.mode(WIFI_STA);
 
         // Register multi WiFi networks
-        wifiMulti.addAP(WIFI_SSID_1, WIFI_PASSWORD_1);
-        wifiMulti.addAP(WIFI_SSID_2, WIFI_PASSWORD_2);
-        wifiMulti.addAP(WIFI_SSID_3, WIFI_PASSWORD_3);
-        wifiMulti.addAP(WIFI_SSID_4, WIFI_PASSWORD_4);
+        G_wifiMulti.addAP(WIFI_SSID_1, WIFI_PASSWORD_1);
+        G_wifiMulti.addAP(WIFI_SSID_2, WIFI_PASSWORD_2);
+        G_wifiMulti.addAP(WIFI_SSID_3, WIFI_PASSWORD_3);
+        G_wifiMulti.addAP(WIFI_SSID_4, WIFI_PASSWORD_4);
 
         Message::working("Connecting to WiFi\t", false);
 
-        /*
-        Serial.println(F("\n🤖  Connecting to WiFi …"));
-        if (wifiMulti.run() == WL_CONNECTED)
-        {
-            Serial.println("🤖  Connected to WiFi network!");
-            Serial.println("\tSSID:\t\t" + WiFi.SSID());
-            Serial.println("\tIP address:\t" + WiFi.localIP().toString());
-            Serial.println("\tGateway:\t" + WiFi.gatewayIP().toString());
-            Serial.println("\tSubnet mask:\t" + WiFi.subnetMask().toString());
-            Serial.println("\tDNS:\t\t" + WiFi.dnsIP().toString());
-            Serial.println("\tMAC address:\t" + WiFi.macAddress());
-
-            // Request
-            HTTPClient http;
-
-            // Make the request
-            http.begin(API_URL_APPOINTMENTS);
-            int httpCode = http.GET();
-
-            if (httpCode == 200)
-            {
-                // Get the response payload
-                payload = http.getString();
-            }
-            else
-            {
-                Serial.printf("\n❌  [HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
-            }
-
-            // Free the resources
-            http.end();
-        }
-        else
-        {
-            Serial.println(F("❌  Failed to connect to WiFi network."));
-        }
-    */
     }
 
     bool loop()
     {
-        if (wifiMulti.run(networkConnectTimeoutMs) != WL_CONNECTED)
+        if (G_wifiMulti.run(networkConnectTimeoutMs) != WL_CONNECTED)
         {
             if (networkTrys % 6 == 0)
             {

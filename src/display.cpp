@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <Adafruit_SSD1306.h>
+#include <Wire.h>
 
 // Configuration
 #include "config.h"
@@ -18,6 +19,7 @@ namespace Display
     void setup()
     {
         Message::info("Setup: Display");
+        Wire.begin(D5, D6);
         display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
         display.setTextSize(3);
         display.setTextColor(SSD1306_WHITE);
@@ -31,8 +33,20 @@ namespace Display
      * @param text String to print on the display
      * @return void
      */
-    void set(String text)
+    void set(String text, bool small = false)
     {
+        display.clearDisplay();
+        if (small)
+        {
+            display.setTextSize(1);
+        }
+        else
+        {
+            display.setTextSize(3);
+        }
+        display.println(text);
+        display.display();
+
         display.clearDisplay();
         display.setCursor(0, 0);
         display.print(text);

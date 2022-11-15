@@ -2,6 +2,20 @@
 	"files.associations": {
 		"Vagrantfile": "ruby",
 		"optional": "cpp",
-		"system_error": "cpp"
+		"system_error": "cpp",
+		"bit": "cpp",
+		"*.tcc": "cpp",
+		"set": "cpp",
+		"executor": "cpp",
+		"random": "cpp",
+		"functional": "cpp",
+		"future": "cpp",
+		"istream": "cpp",
+		"limits": "cpp",
+		"ostream": "cpp",
+		"sstream": "cpp",
+		"stop_token": "cpp",
+		"streambuf": "cpp",
+		"tuple": "cpp"
 	}
 }

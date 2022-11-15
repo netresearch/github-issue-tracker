@@ -21,7 +21,6 @@ std::optional<int> G_issueCount = 0;
 
 void setup()
 {
-    // Wire.begin(D5, D6);
 
     // Init serial
     Serial.begin(115200);
@@ -30,9 +29,10 @@ void setup()
     delay(2000);
 
     // Logo
+    Display::setup();
     Message::logo();
     Fetch::setup();
-    Display::setup();
+    Display::set("Connecting WiFi", true);
     Network::setup();
     Ota::setup();
 }
@@ -46,27 +46,15 @@ void loop()
         if (issueCount != -1)
         {
             G_issueCount = issueCount;
-            Message::info("Issue count: " + String(G_issueCount.value()));
-            // Display::set(String(issueCount.value()));
+            Message::info("Issue count:\t" + String(issueCount.value()));
+            Display::set(String(issueCount.value()));
+        }
+        else
+        {
+            Message::error("Issue count:\t" + String(issueCount.value()));
+            Display::set("Data error", true);
         }
 
         delay(delayTime);
     }
-
-    /*
-   std::optional<int> totalOpenIssues = fetchTotalOpenIssues();
-    if (totalOpenIssues)
-    {
-        // Serial.printf("Total open issues: %d\n", totalOpenIssues.value());
-        // Serial.printf("Total open issues: %d\n", totalOpenIssues);
-        display.clearDisplay();
-        display.setCursor(0, 0);
-        display.printf("%d", totalOpenIssues.value());
-        display.display();
-    }
-    else
-    {
-        // Serial.println(F("Failed to fetch repositories"));
-    }
-    */
 }

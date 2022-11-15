@@ -2,12 +2,15 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <ESP8266HTTPClient.h>
-#include <WiFiClientSecure.h>
+#include <WiFiClientSecureBearSSL.h>
+#include <WiFiClient.h>
 #include <optional>
 
 // Custom classes and configuration
 #include "config.h"
 #include "message.h"
+
+// Global variables
 #include "globals.h"
 
 namespace Fetch
@@ -20,7 +23,6 @@ namespace Fetch
     int iteration = 0;
     int iterationFirst = true;
     int iterationTime = 0;
-
     std::optional<int> fetchTotalOpenIssues();
 
     /**
@@ -48,17 +50,10 @@ namespace Fetch
         {
             iterationFirst = false;
             std::optional<int> totalOpenIssues = fetchTotalOpenIssues();
-            if (totalOpenIssues)
-            {
-                return totalOpenIssues;
-            }
-            else
-            {
-                return -1;
-            }
+            G_issueCount = totalOpenIssues;
             iteration = 0;
         }
-        return -1;
+        return G_issueCount;
     }
 
     /**
@@ -68,11 +63,13 @@ namespace Fetch
      */
     std::optional<int> fetchTotalOpenIssues()
     {
-        int totalOpenIssues = 0;
+        int totalOpenIssues = -1;
 
         WiFiClientSecure client;
         client.setInsecure();
         HTTPClient https;
+
+        Message::working("Fetch data from GitHub API\t", false);
 
         if (!https.begin(client, "https://api.github.com/graphql"))
         {
@@ -81,42 +78,39 @@ namespace Fetch
             return std::nullopt;
         }
 
-        G_issueCount = 0;
-
         https.addHeader("Content-Type", "application/json");
         https.addHeader("Authorization", "Bearer " + String(GITHUB_TOKEN));
 
         // POST request with query
-        // String query = "{\"query\":\"{ search(query: \"org:"+ String(GITHUB_OWNER) + " state:open\", type: ISSUE) { issueCount  }}\",\"variables\":{}}";
-        int httpCode = https.POST("{\"query\":\"{ search(query: \"org:" + String(GITHUB_ORGANISATION) + " state:open\", type: ISSUE) { issueCount  }}\",\"variables\":{}}");
-
+        int httpCode = https.POST("{\"query\":\"{ search(query: \\\"org:" + String(GITHUB_ORGANISATION) + " state:open\\\", type: ISSUE) { issueCount}}\"}");
+        // int httpCode = https.POST("{\"query\":\"{ organization(login: \\\"netresearch\\\") { repositories(first: 100) { nodes { issues(states: OPEN ) { totalCount } } } } }\"}");
         if (httpCode != 200)
         {
             Message::error("Unable to fetch data from GitHub API");
-            Serial.printf("\t\tHTTPClient failure: %s\n", https.errorToString(httpCode).c_str());
+            Serial.printf("\tHTTPClient failure: ");
+            Serial.println(httpCode);
+            while (client.available())
+            {
+                char c = client.read();
+                Serial.println(c);
+            }
 
             https.end();
             return std::nullopt;
+        } else {
+            Message::success("Fetch data from GitHub API successfull", true, true);
+            DynamicJsonDocument doc(8192);
+            DeserializationError error = deserializeJson(doc, https.getStream());
+
+            if (error)
+            {
+                Serial.print(F("deserializeJson() failed: "));
+                Serial.println(error.f_str());
+                return std::nullopt;
+            }
+            totalOpenIssues = doc["data"]["search"]["issueCount"];
+            https.end();
         }
-
-        DynamicJsonDocument doc(8192);
-        DeserializationError error = deserializeJson(doc, https.getStream());
-
-        if (error)
-        {
-            Serial.print(F("deserializeJson() failed: "));
-            Serial.println(error.f_str());
-            return std::nullopt;
-        }
-
-        https.end();
-
-        for (JsonObject repository : doc["data"]["organization"]["repositories"]["nodes"].as<JsonArray>())
-        {
-            int openIssues = repository["issues"]["totalCount"];
-            totalOpenIssues += openIssues;
-        }
-
         return totalOpenIssues;
     }
 };

@@ -13,5 +13,5 @@ namespace Display
      * @param text String to print on the display
      * @return void
      */
-    void set(String text);
+    void set(String text, bool small = false);
 }
