@@ -1,18 +1,29 @@
 # GitHub issue tracker
 
-IOT project to monitor the amount of GitHub issues of a organisation.
+> IOT project to monitor the amount of GitHub issues of a organisation.
+
+![Final product](docs/display.png)
+
+We as Netresearch using GitHub to publish our open source projects.
+It is very important to us, to respond to the issues and pull requests as fast as possible. Therefore we have implemented a display of the current status of
+open issues and pull requests to have a quick overview of the current state.
 
 ## Requirements
 
+If you want to use this project for your own organisation, you need to have a a little bit of hardware. The display should be connected to a power supply and to the internet.
+
 ### Hardware
 
-- [ ] A4 Picture frame
-- [ ] ESP 8266 Wemos D1 mini
-- [ ] Power supply unit
-- [ ] Battery with voltage regulator
-- [ ] 7 segment display 4 digits / OLED Display
+- [x] A4 Picture frame
+- [x] ESP 8266 Wemos D1 mini
+- [x] USB power supply unit 5V 0,5A
+- [x] OLED Display
 
 ### Tools
+
+![Tools](docs/tools.png)
+
+To put the project together, you need some tools.
 
 #### Soldering
 
@@ -26,12 +37,7 @@ IOT project to monitor the amount of GitHub issues of a organisation.
 
 - [x] Silicon cables 25AWG for the wiring
 - [x] Micro USB cable to flash the ESP8266
-- [x] Type C USB cable to charge the battery
 
-#### Power supply
-
-- [x] Power supply USB Type C to charge the battery
-  
 ### Software requirements
 
 - VSCode
@@ -42,46 +48,26 @@ IOT project to monitor the amount of GitHub issues of a organisation.
 
 ### Features
 
-- [ ] OTA
-- [ ] Configurable
-  - [ ] Organisation
-  - [ ] Token
-- [ ] Deep Sleep
-- [ ] Battery monitoring
-- [ ] Polling GitHub API
-  - [ ] https://docs.github.com/en/rest/issues/issues#list-repository-issues
-  - [ ] gh api -H "Accept: application/vnd.github+json" /orgs/netresearch/repos
+- [x] OTA
+- [x] Configurable
+  - [x] Organisation
+  - [x] Token
+  - [x] WiFi credentials
+- [x] Polling GitHub API
 
 ## GraphQL
 
-https://docs.github.com/en/graphql/overview/explorer
+It uses the GitHub GraphQL API to get the data. If you want, you can play around with the GraphQL queries in the [GitHub GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer).
 
 ```gql
-{
-  viewer {
-    login
-    email
-    organizations(first:100) {
-      nodes {
-        name,
-        repositories(first:100) {
-          nodes {
-            description
-          }
-        }
-      }
+{ search(
+    query: "org:netresearch state:open", type: ISSUE) { 
+        issueCount
     }
-  }
 }
 ```
 
 ## Documentation
-
-### GitHub Repository
-
-- [ ] Description
-- [ ] Rebuild instructions
-- [ ] C++ software
 
 ### Photos
 

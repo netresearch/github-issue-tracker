@@ -2,33 +2,33 @@
 
 ## Intro
 
-- [ ] Willkommen im Fridays. Der Ort für Kollegen von Netresearch in Leipzig um sich über neue Technologien und Lösungsansätze auszutauschen. Jeder Lust hat, trifft sich einmal in der Woche für 1 genau Stunde Remote, oder direkt bei uns im Büro in der Küche im Fridays MeetUp; kurz Fridays.
-- [ ] Wir bei Netresearch lieben Open Source. Nicht selten ist bei uns die Antwort auf die Frage welche Software das Problem des Kunden löst, eine Lösung aus der Open Source Community. Wir lieben also nicht nur Open Source, wir leben auch davon. TYPO3, Magento, Shopware, Akeneo, React Native und OROCRM bieten unseren Kunden eine gute Basis für individuell zugeschnittene Software. Wir nehmen aber nicht nur, wir geben der Community auch etwas zurück. Unsere drei beliebtesten Projekte auf GitHub sind das *composer-patches-plugin*, das Magento Tool  *jumpstorm* und die TYPO3 Backend Erweiterung für den CKEditor *t3x-rte_ckeditor_image* zum verwenden von Bildern innerhalb von Texten.
-- [ ] Netresearch betreut auf GitHub derzeit Stand Sommer 2022 **190** Open Source Projekte unter dem Organisation Account *netresearch*. Wir freuen uns über Contributions und sind bemüht so schnell wie möglich auf Bug-Reports oder andere Anfragen der Community zu reagieren. Um die Anzahl der offenen Tickets im Blick zu behalten, möchten wir bei uns im Büro in der Küche ein Display aufstellen, welches die aktuelle Anzahl der offenen Tickets auf GitHub darstellt. Das soll uns helfen und motivieren schnell auf Anfragen aus der Community zu reagieren.
-- [ ] Wir werden dazu mit einem Microcontroller, dem ESP8266, auf die GitHup API zugreifen und die entsprechenden Daten mit C++ zusammenfassen und das Ergebnis auf einem LED Display darstellen. Anschließend gestalten wir noch einen Bilderrahmen, indem wir die Technik einbauen werden.
-- [ ] Wir haben genau noch 1 Stunde Zeit. Der Zeitplan ist sportlich, doch wir arbeiten alle parallel an verschieden Teilbereichen des Projektes.
-- [ ] "Wir" das sind [TEILNEHMER].
-  - [ ] X wird die Dokumentation schreiben.
-  - [ ] X wird die Software entwickeln.
-  - [ ] X wird sich um die Hardware kümmern.
-- [ ] Dieses Video ist also nicht direkt ein Tutorial, mehr eine Challenge, doch werden wir unsere Dokumentation mit der Teile-Liste, Schaltplan und der Software in einem GitHub repository zum nachbauen veröffentlichen.
+- [ ] Welcome to Fridays. The place for colleagues from Netresearch in Leipzig to exchange ideas about new technologies and solutions. Everyone who wants to meets once a week for 1 hour remotely or directly in our office in the kitchen at the Fridays MeetUp; Fridays for short.
+- [ ] We at Netresearch love Open Source. It is not uncommon for us to find a solution from the open source community to the question of which software solves the customer's problem. So we not only love Open Source, we also live from it. TYPO3, Magento, Shopware, Akeneo, React Native and OROCRM offer our customers a good basis for individually tailored software. But we don't just take, we also give something back to the community. Our three most popular projects on GitHub are the *composer-patches-plugin*, the Magento tool *jumpstorm* and the TYPO3 backend extension for the CKEditor *t3x-rte_ckeditor_image* for using images within texts.
+- [ ] Netresearch currently maintains **190** open source projects on GitHub under the organisation account *netresearch* as of summer 2022. We welcome contributions and try to respond as quickly as possible to bug reports or other requests from the community. To keep track of the number of open tickets, we would like to set up a display in the kitchen of our office that shows the current number of open tickets on GitHub. This should help and motivate us to react quickly to requests from the community.
+- [ ] We will access the GitHup API with a microcontroller, the ESP8266, and summarise the corresponding data with C++ and show the result on an LED display. Afterwards, we will design a picture frame in which we will integrate the technology.
+- [ ] We have exactly 1 hour left. The time schedule is sporty, but we are all working in parallel on different parts of the project.
+- [ ] "We" that is [PARTICIPANTS].
+  - [ ] X will write the documentation.
+  - [ ] X will develop the software.
+  - [ ] X will take care of the hardware.
+- [ ] So this video is not directly a tutorial, more of a challenge, but we will publish our documentation with the parts list, schematic and the software in a GitHub repository to rebuild.
 
-## 1. Hardware
+## 1. hardware
 
-- [ ] Was benötigen wir dazu für Hardware?
-- [ ] Wie lange hält die Batterie?
+- [ ] What hardware do we need?
+- [ ] How long will the battery last?
 
-## 2. Software
+## 2. software
 
-- [ ] Was muss die Software leisten? Was sind die Funktionen?
-- [ ] Wie oft sollen die Daten aktualisiert werden?
+- [ ] What does the software need to do? What are the functions?
+- [ ] How often should the data be updated?
 
-## Montage
+## Assembly
 
-- [ ] Wie bekommen wir nun die Software auf den Microcontroller?
-- [ ] Gibt es dabei etwas zu beachten?
-- [ ] Wie stehts beim Thema Sicherheit, benötigt die Software regelmäßige updates?
+- [ ] How do we get the software onto the microcontroller?
+- [ ] Is there anything to consider?
+- [ ] What about security, does the software need regular updates?
 
-## Demonstration und Abschluss
+## Demonstration and conclusion
 
-- [ ] Was könnte man noch besser machen?
+- [ ] What could be done better?

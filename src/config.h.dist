@@ -2,8 +2,6 @@
 
 #define GITHUB_TOKEN ""
 #define GITHUB_ORGANIZATION ""
-GITHUB_OWNER ""
-
 
 #define OTA_HOSTNAME ""
 #define OTA_PASSWORD ""
@@ -19,5 +17,3 @@ GITHUB_OWNER ""
 
 #define WIFI_SSID_4 ""
 #define WIFI_PASSWORD_4 ""
-
-
