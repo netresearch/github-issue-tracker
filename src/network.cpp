@@ -1,5 +1,5 @@
 // Libraries
-#include <ESP8266WiFiMulti.h>
+#include <ESP8266WiFi.h>
 
 #include "network.h"
 
@@ -15,11 +15,6 @@ namespace Network
     // Configuration
     uint8_t networkTrys = 0;
     bool networkConnected = false;
-    // WiFi connect timeout per AP. Increase when connecting takes longer.
-    const uint32_t networkConnectTimeoutMs = 5000;
-
-    // Namespace
-    using namespace std;
 
     void setup()
     {
@@ -32,19 +27,14 @@ namespace Network
         // Set WiFi to station mode
         WiFi.mode(WIFI_STA);
 
-        // Register multi WiFi networks
-        G_wifiMulti.addAP(WIFI_SSID_1, WIFI_PASSWORD_1);
-        G_wifiMulti.addAP(WIFI_SSID_2, WIFI_PASSWORD_2);
-        G_wifiMulti.addAP(WIFI_SSID_3, WIFI_PASSWORD_3);
-        G_wifiMulti.addAP(WIFI_SSID_4, WIFI_PASSWORD_4);
+        WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
         Message::working("Connecting to WiFi\t", false);
-
     }
 
     bool loop()
     {
-        if (G_wifiMulti.run(networkConnectTimeoutMs) != WL_CONNECTED)
+        if (WiFi.status() != WL_CONNECTED)
         {
             if (networkTrys % 6 == 0)
             {
@@ -74,6 +64,7 @@ namespace Network
 
                 networkConnected = true;
             }
+
             return true;
         }
     }
