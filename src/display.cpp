@@ -36,6 +36,7 @@ namespace Display
     void set(String text, bool small = false)
     {
         display.clearDisplay();
+
         if (small)
         {
             display.setTextSize(1);
@@ -44,10 +45,7 @@ namespace Display
         {
             display.setTextSize(3);
         }
-        display.println(text);
-        display.display();
 
-        display.clearDisplay();
         display.setCursor(0, 0);
         display.print(text);
         display.display();
