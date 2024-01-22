@@ -82,7 +82,7 @@ namespace Fetch
         https.addHeader("Authorization", "Bearer " + String(GITHUB_TOKEN));
 
         // POST request with query
-        int httpCode = https.POST("{\"query\":\"{ search(query: \\\"org:" + String(GITHUB_ORGANISATION) + " state:open\\\", type: ISSUE) { issueCount}}\"}");
+        int httpCode = https.POST("{\"query\":\"{ search(query: \\\"org:" + String(GITHUB_ORGANIZATION) + " state:open\\\", type: ISSUE) { issueCount}}\"}");
         // int httpCode = https.POST("{\"query\":\"{ organization(login: \\\"netresearch\\\") { repositories(first: 100) { nodes { issues(states: OPEN ) { totalCount } } } } }\"}");
         if (httpCode != 200)
         {
