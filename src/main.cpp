@@ -17,11 +17,10 @@
 
 // Variables and constants
 const int delayTime = 10000;
-std::optional<int> G_issueCount = 0;
+int G_issueCount = 0;
 
 void setup()
 {
-
     // Init serial
     Serial.begin(115200);
     while (!Serial)
@@ -31,7 +30,6 @@ void setup()
     // Logo
     Display::setup();
     Message::logo();
-    Fetch::setup();
     Display::set("Connecting WiFi", true);
     Network::setup();
     Ota::setup();
@@ -42,16 +40,15 @@ void loop()
     if (Network::loop())
     {
         Ota::loop();
-        auto issueCount = Fetch::loop(delayTime);
-        if (issueCount != -1)
+        auto issueCount = Fetch::fetchIssues(delayTime);
+        if (issueCount.has_value())
         {
-            G_issueCount = issueCount;
-            Message::info("Issue count:\t" + String(issueCount.value()));
-            Display::set(String(issueCount.value()));
+            G_issueCount = issueCount.value();
+            Message::info("Issue count:\t" + String(G_issueCount));
+            Display::set(String(G_issueCount));
         }
         else
         {
-            Message::error("Issue count:\t" + String(issueCount.value()));
             Display::set("Data error", true);
         }
 

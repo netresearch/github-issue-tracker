@@ -27,20 +27,11 @@ namespace Fetch
     std::optional<int> fetchTotalOpenIssues();
 
     /**
-     * @brief Setup the fetch class
-     * @return void
-     */
-    void setup()
-    {
-        Message::info("Setup: Fetch");
-    }
-
-    /**
      * @brief Fetches the total number of open issues from the GitHub API
      * @param delayTime Time to wait each iteration
      * @return std::optional<int> Total issue count
      */
-    std::optional<int> loop(int delayTime)
+    std::optional<int> fetchIssues(int delayTime)
     {
         // @todo Bring iteration loop to main loop
         iteration++;
@@ -51,10 +42,12 @@ namespace Fetch
         {
             iterationFirst = false;
             std::optional<int> totalOpenIssues = fetchTotalOpenIssues();
-            G_issueCount = totalOpenIssues;
             iteration = 0;
+
+            return totalOpenIssues;
         }
-        return G_issueCount;
+
+        return std::optional(G_issueCount);
     }
 
     /**
@@ -99,7 +92,7 @@ namespace Fetch
             https.end();
             return std::nullopt;
         } else {
-            Message::success("Fetch data from GitHub API successfull", true, true);
+            Message::success("Fetch data from GitHub API successful", true, true);
             DynamicJsonDocument doc(8192);
             DeserializationError error = deserializeJson(doc, https.getStream());
 
